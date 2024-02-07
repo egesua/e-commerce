@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import "./App.css";
+import Main from "./layouts/Main";
+import { animateScroll as scroll } from "react-scroll";
+import { useDispatch } from "react-redux";
+import { getUserVerifyAction } from "./store/actions/userAction";
 
 function App() {
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //todo: thunk action ile yapılacak
+    if (localStorage.getItem("token")) {
+      dispatch(getUserVerifyAction());
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Main />
+      <a
+        onClick={scrollToTop}
+        className="animate-bounce text-center flex flex-col items-center fixed sm:right-10 left-[300px] sm:left-[1300px] bottom-2 rounded-[100%]"
+      >
+        <i className="bx bxs-chevron-up text-[#7673a6] text-5xl hover:text-[#3730A3]"></i>
+        go up
+      </a>
+    </>
   );
 }
 
