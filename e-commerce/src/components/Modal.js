@@ -2,7 +2,7 @@ import { Spinner } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { setAddressThunkAction } from "../store/actions/shoppingCartAction";
 import { useDispatch } from "react-redux";
-import { API } from "../api/api";
+import { API } from "../../api/api";
 
 const Modal = ({
   spinner,
